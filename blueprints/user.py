@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, url_for
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from database import run_query
 from util import get_data
 
@@ -20,20 +20,57 @@ def get_all():
 
 @user.post("/")
 def add_one():
+    username = get_data("username")
+    password = generate_password_hash(get_data("password"))
+    name = get_data("name")
+    mail = get_data("mail")
+    address = get_data("address")
+    birthdate = get_data("birthdate")
+
+    if len(run_query("SELECT id FROM users WHERE username = %s;", (username,))):
+        return jsonify({"error": "Username already exists"})
+
+    if len(run_query("SELECT id FROM users WHERE mail = %s;", (mail,))):
+        return jsonify({"error": "Email address already registered"})
+
     return jsonify(
         run_query(
             """
                 INSERT INTO users (username, password, name, mail, address, birthdate)
-                VALUES (%s, %s, %s, %s, %s, %s) RETURNING *;
+                VALUES (%(username)s, %(password)s, %(name)s, %(mail)s, %(address)s, %(birthdate)s) RETURNING id, name, username;
             """,
-            (
-                get_data("username"),
-                generate_password_hash(get_data("password")),
-                get_data("name"),
-                get_data("mail"),
-                get_data("address"),
-                get_data("birthdate"),
-            ),
+            {
+                "username": username,
+                "password": password,
+                "name": name,
+                "mail": mail,
+                "address": address,
+                "birthdate": birthdate,
+            },
+            True,
+        )
+    )
+
+
+@user.post("/login")
+def login():
+    username = get_data("username")
+    password = get_data("password")
+
+    passwd = run_query(
+        "SELECT password FROM users WHERE username = %(username)s;",
+        {"username": username},
+    )
+    if not passwd:
+        return jsonify({"error": "Username or password incorrect"})
+
+    if not check_password_hash(passwd[0].get("password"), password):
+        return jsonify({"error": "Username or password not correct"})
+
+    return jsonify(
+        run_query(
+            "SELECT id, username, name FROM users WHERE username = %(username)s;",
+            {"username": username},
             True,
         )
     )
@@ -44,7 +81,12 @@ def get_one(id):
     return jsonify(
         run_query(
             """
-                SELECT *
+                SELECT
+                    username,
+                    name,
+                    mail,
+                    address,
+                    to_char(birthdate, 'YYYY-MM-DD') as birthdate,
                 FROM users
                 WHERE id = %s;
             """,
