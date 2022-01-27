@@ -59,13 +59,21 @@ def get_one(id):
 def get_posts(id):
     query = run_query(
         """
-            SELECT id
+            SELECT id, title
             FROM posts
             WHERE user_id = %s;
             """,
         (id,),
     )
-    return jsonify([url_for("post.get_one", id=entry.get("id")) for entry in query])
+    return jsonify(
+        [
+            {
+                "link": url_for("post.get_one", id=entry.get("id")),
+                "title": entry.get("title"),
+            }
+            for entry in query
+        ]
+    )
 
 
 @user.put("/<int:id>")
