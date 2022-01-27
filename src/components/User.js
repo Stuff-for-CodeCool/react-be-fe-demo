@@ -20,7 +20,7 @@ const User = () => {
             `${process.env.REACT_APP_BACKEND}/users/${id}`,
             loadPosts
         );
-    });
+    }, [id]);
 
     return (
         <>

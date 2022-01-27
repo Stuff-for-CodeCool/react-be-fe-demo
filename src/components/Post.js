@@ -26,29 +26,6 @@ const Post = () => {
             ))}
         </>
     );
-
-    // return (
-    //     <div className="table-responsive">
-    //         <table className="table table-striped">
-    //             <thead>
-    //                 <tr>
-    //                     <th>Title</th>
-    //                     <th>Posted on</th>
-    //                 </tr>
-    //             </thead>
-    //             <tbody>
-    //                 {posts.map((u, i) => (
-    //                     <tr key={u.id}>
-    //                         <td>
-    //                             <Link to={`/posts/${u.id}`}>{u.title}</Link>
-    //                         </td>
-    //                         <td>{u.posted}</td>
-    //                     </tr>
-    //                 ))}
-    //             </tbody>
-    //         </table>
-    //     </div>
-    // );
 };
 
 export default Post;
