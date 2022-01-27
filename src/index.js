@@ -1,17 +1,44 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { StrictMode } from "react";
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+} from "react-router-dom";
+import { render } from "react-dom";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+import "./index.css";
+
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Welcome from "./components/Welcome";
+import Users from "./components/Users";
+import User from "./components/User";
+import Posts from "./components/Posts";
+import Post from "./components/Post";
+
+const App = () => {
+    return (
+        <>
+            <Header />
+            <main className="container my-3">
+                <Routes>
+                    <Route path="/" element={<Welcome />}></Route>
+                    <Route path="/users" element={<Users />}></Route>
+                    <Route path="/users/:id" element={<User />}></Route>
+                    <Route path="/posts" element={<Posts />}></Route>
+                    <Route path="/posts/:id" element={<Post />}></Route>
+                </Routes>
+            </main>
+            <Footer />
+        </>
+    );
+};
+
+render(
+    <BrowserRouter>
+        <StrictMode>
+            <App></App>
+        </StrictMode>
+    </BrowserRouter>,
+    document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
