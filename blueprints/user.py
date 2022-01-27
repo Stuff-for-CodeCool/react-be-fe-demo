@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash
 from database import run_query
 from util import get_data
 
-user = Blueprint("user", __name__, url_prefix="/user")
+user = Blueprint("user", __name__, url_prefix="/users")
 
 
 @user.get("/")
@@ -105,9 +105,7 @@ def remove(id):
                 FROM users
                 WHERE id = %(id)s;
             """,
-            {
-                "id": id,
-            },
+            {"id": id},
             True,
         )
     )

@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash
 from database import run_query
 from util import get_data
 
-post = Blueprint("post", __name__, url_prefix="/post")
+post = Blueprint("post", __name__, url_prefix="/posts")
 
 
 @post.get("/")

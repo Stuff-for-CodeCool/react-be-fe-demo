@@ -16,10 +16,16 @@ CORS(app)
 @app.get("/")
 def index():
     return jsonify(
-        {
-            "users": url_for("user.get_all"),
-            "posts": url_for("post.get_all"),
-        }
+        [
+            {
+                "title": "Users",
+                "link": url_for("user.get_all"),
+            },
+            {
+                "title": "Posts",
+                "link": url_for("post.get_all"),
+            },
+        ]
     )
 
 
