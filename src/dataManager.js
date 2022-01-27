@@ -14,9 +14,13 @@ const dataManager = {
         }
     },
     post: async (url, callback, data) => {
-        const opts = { ...generalOptions, body: data, method: "POST" };
+        // const opts = ;
 
-        const request = await fetch(url, opts);
+        const request = await fetch(url, {
+            method: "POST",
+            ...generalOptions,
+            body: JSON.stringify(data),
+        });
         if (request.ok) {
             const response = await request.json();
             callback(response);

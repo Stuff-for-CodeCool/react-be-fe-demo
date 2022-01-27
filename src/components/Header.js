@@ -43,7 +43,7 @@ const Header = () => {
                     </ul>
                     {currentUser ? (
                         <>
-                            <span className="ms-auto navbar-text">{currentUser}</span>
+                            <span className="ms-auto navbar-text text-warning">{currentUser.name}</span>
                             <ul className="navbar-nav mb-2 mb-lg-0">
                                 <li className="nav-item">
                                     <ActiveLink
