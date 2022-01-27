@@ -1,9 +1,9 @@
---
--- PostgreSQL database dump
---
 
--- Dumped from database version 13.5 (Ubuntu 13.5-0ubuntu0.21.10.1)
--- Dumped by pg_dump version 13.5 (Ubuntu 13.5-0ubuntu0.21.10.1)
+
+
+
+
+
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -28,9 +28,9 @@ SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
---
--- Name: posts; Type: TABLE; Schema: public; Owner: -
---
+
+
+
 
 CREATE TABLE public.posts (
     id integer NOT NULL,
@@ -41,9 +41,9 @@ CREATE TABLE public.posts (
 );
 
 
---
--- Name: posts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
+
+
+
 
 CREATE SEQUENCE public.posts_id_seq
     AS integer
@@ -54,16 +54,18 @@ CREATE SEQUENCE public.posts_id_seq
     CACHE 1;
 
 
---
--- Name: posts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
+
+
+
 
 ALTER SEQUENCE public.posts_id_seq OWNED BY public.posts.id;
 
 
---
--- Name: users; Type: TABLE; Schema: public; Owner: -
---
+
+
+
+--  ALL PASSWORDS ARE 1234
+
 
 CREATE TABLE public.users (
     id integer NOT NULL,
@@ -76,9 +78,9 @@ CREATE TABLE public.users (
 );
 
 
---
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
+
+
+
 
 CREATE SEQUENCE public.users_id_seq
     AS integer
@@ -89,30 +91,30 @@ CREATE SEQUENCE public.users_id_seq
     CACHE 1;
 
 
---
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
+
+
+
 
 ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
---
--- Name: posts id; Type: DEFAULT; Schema: public; Owner: -
---
+
+
+
 
 ALTER TABLE ONLY public.posts ALTER COLUMN id SET DEFAULT nextval('public.posts_id_seq'::regclass);
 
 
---
--- Name: users id; Type: DEFAULT; Schema: public; Owner: -
---
+
+
+
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
 
 
---
--- Data for Name: posts; Type: TABLE DATA; Schema: public; Owner: -
---
+
+
+
 
 INSERT INTO public.posts VALUES (1, 9, 'Yes mother effect.', 'Suffer bag ability woman under safe relationship.
 Painting machine book total while out voice decision. Stuff window conference general administration. News with national society sea.
@@ -1304,9 +1306,9 @@ Newspaper laugh every position trouble security cup. Forward level this smile at
 Leg concern least late. Law throughout seek ability Congress accept.', '2007-05-18 00:00:00');
 
 
---
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
---
+
+
+
 
 INSERT INTO public.users VALUES (1, 'kevin60', 'pbkdf2:sha256:260000$dD0Opsi6jBx0FPdZ$adccc86ffedd1b7980c29de6f7194f19d10b00d1069bd206a4434576c9742a2f', 'Barbara Burnett', 'mpreston@hotmail.com', 'PSC 3641, Box 9940
 APO AE 25523', '2015-02-27 00:00:00');
@@ -1380,37 +1382,37 @@ INSERT INTO public.users VALUES (35, 'kwall', 'pbkdf2:sha256:260000$Od5uQWckctDi
 West Heathermouth, LA 68973', '1979-07-21 00:00:00');
 
 
---
--- Name: posts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
+
+
+
 
 SELECT pg_catalog.setval('public.posts_id_seq', 135, true);
 
 
---
--- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
+
+
+
 
 SELECT pg_catalog.setval('public.users_id_seq', 35, true);
 
 
---
--- Name: posts posts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
+
+
+
 
 ALTER TABLE ONLY public.posts
     ADD CONSTRAINT posts_pkey PRIMARY KEY (id);
 
 
---
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
+
+
+
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
 
---
--- PostgreSQL database dump complete
---
+
+
+
 
